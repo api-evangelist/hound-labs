@@ -1,0 +1,113 @@
+generated: '2026-08-22'
+method: probed
+source: https://hounddiagnostics.com/.well-known/
+hit_count: 0
+note: >-
+  Two hosts were probed. houndlabs.com — the company's original domain — is decommissioned: it
+  resolves to a Fastly address fronting Flywheel managed WordPress, presents a certificate for
+  app.getflywheel.com that does not cover the name, and answers every path, including a random
+  control path, with an identical 48,103-byte "Flywheel - Unknown Domain" 404. hounddiagnostics.com
+  is the live successor site (Cloudflare, 200 on /) and answers unknown paths with an identical
+  83,800-byte 404 shell; a small set of paths (/openapi.yaml, /graphql, /privacy) return a 403 from
+  a Cloudflare managed rule rather than a document, which is a WAF response and not evidence that
+  anything exists there. Nothing returned 200 carrying a real document on either host, so NO
+  WellKnown, SecurityTxt, APICatalog or AgentCard pointer is emitted into apis.yml. This artifact
+  records a verified absence, not a presence.
+hosts:
+- host: https://houndlabs.com
+  status: decommissioned
+  tls_note: >-
+    TLS handshake completes but the certificate (CN=app.getflywheel.com, Sectigo DV, valid to
+    2026-12-13) carries no SAN for houndlabs.com, so an ordinary browser cannot reach the host
+    without a certificate error. Statuses below were read with certificate verification disabled.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  soft_404_control:
+    path: /this-path-does-not-exist-control-9271
+    status: 404
+    bytes: 48103
+    note: Every probed path returns this same body and byte count.
+- host: https://hounddiagnostics.com
+  status: live
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  soft_404_control:
+    path: /this-is-a-control-404-xyz123
+    status: 404
+    bytes: 83800
+    note: Same body and byte count as every missing path above.
+contract_discovery:
+  note: >-
+    STEP 0b run in full against both hosts. No REST OpenAPI, no GraphQL endpoint, no MCP endpoint
+    and no A2A agent card. robots.txt on the successor host is a two-line Crawl-delay file with no
+    sitemap and no spec reference; there is no sitemap.xml and no llms.txt. Certificate-transparency
+    and DNS enumeration found no api/app/portal/docs/developer subdomain on either domain.
+  probes:
+  - {url: 'https://houndlabs.com/openapi.json', status: 404}
+  - {url: 'https://houndlabs.com/openapi.yaml', status: 404}
+  - {url: 'https://houndlabs.com/swagger.json', status: 404}
+  - {url: 'https://houndlabs.com/api-docs', status: 404}
+  - {url: 'https://houndlabs.com/docs', status: 404}
+  - {url: 'https://houndlabs.com/graphql', status: 404}
+  - {url: 'https://houndlabs.com/mcp', status: 404}
+  - {url: 'https://houndlabs.com/llms.txt', status: 404}
+  - {url: 'https://houndlabs.com/robots.txt', status: 404}
+  - {url: 'https://hounddiagnostics.com/openapi.json', status: 404}
+  - {url: 'https://hounddiagnostics.com/swagger.json', status: 404}
+  - {url: 'https://hounddiagnostics.com/api-docs', status: 404}
+  - {url: 'https://hounddiagnostics.com/docs', status: 404}
+  - {url: 'https://hounddiagnostics.com/api', status: 404}
+  - {url: 'https://hounddiagnostics.com/developers', status: 404}
+  - {url: 'https://hounddiagnostics.com/mcp', status: 404}
+  - {url: 'https://hounddiagnostics.com/llms.txt', status: 404}
+  - {url: 'https://hounddiagnostics.com/sitemap.xml', status: 404}
+  - {url: 'https://hounddiagnostics.com/robots.txt', status: 200}
+  - {url: 'https://hounddiagnostics.com/openapi.yaml', status: 403}
+  - {url: 'https://hounddiagnostics.com/graphql', status: 403}
+  subdomains_nxdomain:
+  - api.houndlabs.com
+  - app.houndlabs.com
+  - portal.houndlabs.com
+  - retriever.houndlabs.com
+  - docs.houndlabs.com
+  - developer.houndlabs.com
+  - api.hounddiagnostics.com
+  - app.hounddiagnostics.com
+  - chart.hounddiagnostics.com
+  - portal.hounddiagnostics.com
+  - docs.hounddiagnostics.com
+  - developer.hounddiagnostics.com
+  - login.hounddiagnostics.com
+x-evidence:
+  fetched: '2026-08-22'
+  note: >-
+    No apis.yml pointer is emitted for this file. A recorded absence is valid data; asserting a
+    WellKnown surface the provider does not serve would be false credit.

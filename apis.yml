@@ -1,17 +1,57 @@
 aid: hound-labs
 name: Hound Labs
-description: 'Hound Labs is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Hound Labs was a breath-measurement company founded in 2014 in the San Francisco Bay Area that built
+  the HOUND CANNABIS BREATHALYZER, an ultra-sensitive analytical test that identifies THC molecules in
+  breath down to picogram levels and so narrows cannabis detection to a two-to-three hour recent-use
+  window rather than the days-to-weeks window of urine testing. The company shipped its first commercial
+  product, the HOUND CANNABIS BREATHALYZER Collect + Send, in 2023 into construction, energy, gaming,
+  manufacturing and transportation employers, pairing the handheld device with the Hound Labs Retriever
+  results portal for paperless chain-of-custody and result delivery. The business now trades as Hound
+  Diagnostics, whose about page states it is "formerly known as Hound Labs" and which sells Hound
+  Breathalyzer, Hound Screens (a customizable panel covering cannabis plus up to nineteen substances),
+  Hound Chart (a HIPAA-compliant cloud results platform) and Hound Check background screening. The
+  original houndlabs.com host has been decommissioned and now answers a Flywheel "Unknown Domain" 404
+  behind a TLS certificate that does not cover the name; neither the retired domain nor the live
+  successor site publishes a developer program, API reference, SDK, or machine-readable contract of any
+  kind, so the products are sold and delivered as devices plus a customer-facing web dashboard rather
+  than as a programmable surface.
 url: https://raw.githubusercontent.com/api-evangelist/hound-labs/refs/heads/main/apis.yml
+image: https://hounddiagnostics.com/assets/img/logo-hound.png
 x-type: company
 x-source: harvest:secondary-market
+x-harvest-source-url: https://forgeglobal.com/hound-labs_stock/
 x-tier: stub
 x-tier-reason: harvest
+x-successor:
+  name: Hound Diagnostics
+  url: https://hounddiagnostics.com/
+  basis: >-
+    hounddiagnostics.com/about states the company is "formerly known as Hound Labs"; both domains
+    route mail through the same Microsoft 365 tenant pattern (<domain>.mail.protection.outlook.com).
 specificationVersion: '0.20'
 created: '2026-08-22'
 modified: '2026-08-22'
 tags:
 - Company
+- Diagnostics
+- Drug Testing
+- Medical Devices
+- Occupational Health
+- Workplace Safety
+- Cannabis
+- Breath Analysis
+- Renamed
+tags_raw:
+- Company
+- Diagnostics
+- Drug Testing
+- Medical Devices
+- Occupational Health
+- Workplace Safety
+- Cannabis
+- Breath Analysis
+- Renamed
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -20,4 +60,39 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/hound-labs_stock/
+  url: https://hounddiagnostics.com/
+- type: Support
+  url: https://hounddiagnostics.com/contact
+- type: DomainSecurity
+  url: security/hound-labs-domain-security.yml
+x-enrichment:
+  date: '2026-08-22'
+  status: minimal
+  artifacts_added: 2
+  pass: local-v1
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    Hound Labs sells a handheld cannabis breathalyzer and, as Hound Diagnostics since the rename,
+    a HIPAA-compliant results dashboard called Hound Chart, but the dashboard is an end-user web
+    product with no developer portal, no API reference and no login host of its own — the whole
+    site is a five-page brochure whose only call to action is a demo request form, and the retired
+    houndlabs.com is now a Flywheel "Unknown Domain" 404 served under a certificate that does not
+    even cover the name.
+  evidence:
+  - url: https://houndlabs.com/
+    status: 404
+  - url: https://houndlabs.com/.well-known/agent-card.json
+    status: 404
+  - url: https://hounddiagnostics.com/
+    status: 200
+  - url: https://hounddiagnostics.com/openapi.json
+    status: 404
+  - url: https://hounddiagnostics.com/developers
+    status: 404
+  - url: https://hounddiagnostics.com/robots.txt
+    status: 200
+  - url: https://api.github.com/orgs/Hound-Labs
+    status: 200
+  checked: '2026-08-22'
