@@ -17,6 +17,17 @@ description: >-
   kind, so the products are sold and delivered as devices plus a customer-facing web dashboard rather
   than as a programmable surface.
 url: https://raw.githubusercontent.com/api-evangelist/hound-labs/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - none
+  generated: '2026-08-28'
+  method: derived
 image: https://hounddiagnostics.com/assets/img/logo-hound.png
 x-type: company
 x-source: harvest:secondary-market
